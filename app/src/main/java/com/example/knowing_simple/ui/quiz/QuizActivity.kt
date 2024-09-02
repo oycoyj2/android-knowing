@@ -94,7 +94,7 @@ class QuizActivity : AppCompatActivity() {
     private fun showResult() {
         val intent = Intent(this, QuizResultActivity::class.java).apply {
             val (knownCount, totalCount) = quizService.getResult()
-            putExtra("known", knownCount)
+            putExtra("knownCount", knownCount)
             putExtra("totalCount", totalCount)
         }
         startActivity(intent)
