@@ -4,10 +4,12 @@
     android:orientation="vertical"
     android:padding="8dp">
 
-    <TextView
-        android:id="@+id/questionTextView"
-        android:layout_width="wrap_content"
+    <Button
+        android:id="@+id/questionButton"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sample Question"
-        android:textSize="18sp" />
+        android:textSize="18sp"
+        android:backgroundTint="@color/knowing_theme_color"
+        android:textColor="@android:color/white" />
 </LinearLayout>

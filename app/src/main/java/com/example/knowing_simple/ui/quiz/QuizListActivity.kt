@@ -24,7 +24,7 @@ class QuizListActivity : AppCompatActivity() {
         quizRecyclerView = findViewById(R.id.quizRecyclerView)
         quizRecyclerView.layoutManager = LinearLayoutManager(this)
 
-        quizAdapter = QuizAdapter(listOf())
+        quizAdapter = QuizAdapter(listOf(), this)
         quizRecyclerView.adapter = quizAdapter
 
         loadQuizData()
@@ -37,7 +37,7 @@ class QuizListActivity : AppCompatActivity() {
             val questionList = quizList.map { it.question } // 문제 데이터만 추출
 
             withContext(Dispatchers.Main) {
-                quizAdapter.updateData(questionList) // 어댑터에 데이터 업데이트
+                quizAdapter.updateData(quizList) // 어댑터에 데이터 업데이트
             }
         }
     }
