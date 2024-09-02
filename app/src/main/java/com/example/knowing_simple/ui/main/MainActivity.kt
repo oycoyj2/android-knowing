@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         // 버튼 초기화
         startQuizButton = findViewById(R.id.btnStartQuiz)
         addQuizButton = findViewById(R.id.btnAddQuiz)
-        resetQuizButton = findViewById(R.id.btnResetQuiz)
         quizListButton = findViewById(R.id.btnQuizList)
 
         // 퀴즈 시작 버튼 클릭 시 동작
@@ -42,11 +41,6 @@ class MainActivity : AppCompatActivity() {
         addQuizButton.setOnClickListener {
             val intent = Intent(this, AddQuizActivity::class.java)
             startActivity(intent)
-        }
-
-        // 퀴즈 초기화 버튼 클릭 시 동작
-        resetQuizButton.setOnClickListener {
-            showResetConfirmationDialog()
         }
 
         // 문제 목록 버튼 클릭 시 동작

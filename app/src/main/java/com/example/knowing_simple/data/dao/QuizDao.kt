@@ -18,4 +18,7 @@ interface QuizDao {
 
     @Query("SELECT COUNT(*) FROM quiz_table")
     suspend fun getQuizCount(): Int // 퀴즈 개수 확인
+
+    @Query("DELETE FROM quiz_table WHERE id IN (:ids)")
+    suspend fun deleteQuizzesByIds(ids: List<Int>)
 }

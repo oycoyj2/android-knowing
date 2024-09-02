@@ -1,6 +1,7 @@
 package com.example.knowing_simple.ui.quiz
 
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +17,9 @@ class QuizListActivity : AppCompatActivity() {
 
     private lateinit var quizRecyclerView: RecyclerView
     private lateinit var quizAdapter: QuizAdapter
+    private lateinit var  deleteButton: Button
+    private lateinit var selectAllButton: Button
+    private var isAllSelected = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +31,26 @@ class QuizListActivity : AppCompatActivity() {
         quizAdapter = QuizAdapter(listOf(), this)
         quizRecyclerView.adapter = quizAdapter
 
+        deleteButton = findViewById(R.id.deleteButton)
+        selectAllButton = findViewById(R.id.selectAllButton)
+
         loadQuizData()
+
+        deleteButton.setOnClickListener{
+            deleteSelectedQuizzes()
+        }
+
+        selectAllButton.setOnClickListener {
+            if (isAllSelected) {
+                quizAdapter.deselectAll()
+                selectAllButton.text = "전체 선택"
+            } else {
+                quizAdapter.selectAll()
+                selectAllButton.text = "전체 해제"
+            }
+            isAllSelected = !isAllSelected
+        }
+
     }
 
     private fun loadQuizData() {
@@ -38,6 +61,22 @@ class QuizListActivity : AppCompatActivity() {
 
             withContext(Dispatchers.Main) {
                 quizAdapter.updateData(quizList) // 어댑터에 데이터 업데이트
+            }
+        }
+    }
+
+    private fun deleteSelectedQuizzes() {
+        val selectedIds = quizAdapter.getSelectedQuizIds()
+        if (selectedIds.isNotEmpty()) {
+            CoroutineScope(Dispatchers.IO).launch {
+                val quizDao = QuizDatabase.getDatabase(this@QuizListActivity).quizDao()
+                quizDao.deleteQuizzesByIds(selectedIds.toList()) // 선택된 퀴즈 삭제
+
+                withContext(Dispatchers.Main) {
+                    loadQuizData() // 삭제 후 목록 갱신
+                    isAllSelected = false
+                    selectAllButton.text = "전체 선택"
+                }
             }
         }
     }

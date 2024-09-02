@@ -24,14 +24,6 @@
         android:layout_marginBottom="16dp" />
 
     <Button
-        android:id="@+id/btnResetQuiz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="@color/knowing_theme_color"
-        android:text="퀴즈 초기화"
-        android:layout_marginBottom="16dp"/>
-
-    <Button
         android:id="@+id/btnQuizList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
