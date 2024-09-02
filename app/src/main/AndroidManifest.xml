@@ -13,14 +13,20 @@
         android:theme="@style/Theme.Knowingsimple"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:name=".ui.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".ui.main.MainActivity" />
+        <activity android:name=".ui.quiz.QuizActivity" />
+        <activity android:name=".ui.quiz.QuizResultActivity" />
+        <activity android:name=".ui.addquiz.AddQuizActivity" />
+
     </application>
 
 </manifest>
