@@ -7,7 +7,6 @@ import com.example.knowing_simple.data.model.Quiz
 class QuizService(private val quizDao: QuizDao) {
 
     private var currentQuizIndex = 0
-    private var correctAnswers = 0
     private var quizzes: List<Quiz> = emptyList()
 
     suspend fun loadQuizzes() {
@@ -18,13 +17,8 @@ class QuizService(private val quizDao: QuizDao) {
         return quizzes[currentQuizIndex]
     }
 
-    fun checkAnswer(answer: Boolean): Boolean {
-        val correctAnswer = quizzes[currentQuizIndex].answer.equals("true", ignoreCase = true)
-        if (correctAnswer == answer) {
-            correctAnswers++
-            return true
-        }
-        return false
+    fun updateQuizStatus(isKnown: Boolean) {
+        quizzes[currentQuizIndex].isKnown = isKnown
     }
 
     fun moveToNextQuiz(): Boolean {
@@ -35,11 +29,13 @@ class QuizService(private val quizDao: QuizDao) {
         return false
     }
 
-    fun getResult(): Int {
-        return correctAnswers
+    suspend fun saveQuizStatus() {
+        quizDao.updateQuizzes(quizzes)
     }
 
-    fun getTotalQuizzes(): Int {
-        return quizzes.size
+    fun getResult(): Pair<Int, Int> {
+        val knownCount = quizzes.count { it.isKnown }
+        return Pair(knownCount, quizzes.size) // 아는 문제 수, 전체 문제 수
     }
+
 }

@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 data class Quiz(
     @PrimaryKey(autoGenerate = true) val id: Int = 0,
     val question: String,
-    val answer: String
+    val answer: String,
+    var isKnown: Boolean = false
 )

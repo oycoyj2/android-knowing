@@ -79,11 +79,13 @@ class QuizActivity : AppCompatActivity() {
         isAnswerVisible = !isAnswerVisible
     }
 
-    private fun onAnswerSelected(answer: Boolean) {
-        val isCorrect = quizService.checkAnswer(answer)
+    private fun onAnswerSelected(isKnown: Boolean) {
+        quizService.updateQuizStatus(isKnown)
         if (!quizService.moveToNextQuiz()) {
-            // 모든 퀴즈를 다 풀었을 때 결과 화면으로 이동
-            showResult()
+            CoroutineScope(Dispatchers.IO).launch {
+                quizService.saveQuizStatus()
+                runOnUiThread{ showResult() }
+            }
         } else {
             showQuiz()
         }
@@ -91,8 +93,9 @@ class QuizActivity : AppCompatActivity() {
 
     private fun showResult() {
         val intent = Intent(this, QuizResultActivity::class.java).apply {
-            putExtra("correctAnswers", quizService.getResult())
-            putExtra("totalQuizzes", quizService.getTotalQuizzes())
+            val (knownCount, totalCount) = quizService.getResult()
+            putExtra("known", knownCount)
+            putExtra("totalCount", totalCount)
         }
         startActivity(intent)
         finish()

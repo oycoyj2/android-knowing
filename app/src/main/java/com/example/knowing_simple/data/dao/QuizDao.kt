@@ -3,6 +3,7 @@ package com.example.knowing_simple.data.dao
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
 import com.example.knowing_simple.data.model.Quiz
 
 @Dao
@@ -21,4 +22,7 @@ interface QuizDao {
 
     @Query("DELETE FROM quiz_table WHERE id IN (:ids)")
     suspend fun deleteQuizzesByIds(ids: List<Int>)
+
+    @Update
+    suspend fun updateQuizzes(quizzes: List<Quiz>) // 퀴즈 상태 업데이트
 }
