@@ -10,6 +10,7 @@ import com.example.knowing_simple.R
 import com.example.knowing_simple.data.local.QuizDatabase
 import com.example.knowing_simple.ui.addquiz.AddQuizActivity
 import com.example.knowing_simple.ui.quiz.QuizActivity
+import com.example.knowing_simple.ui.quiz.QuizListActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var startQuizButton: Button
     private lateinit var addQuizButton: Button
     private lateinit var resetQuizButton: Button
+    private lateinit var quizListButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         startQuizButton = findViewById(R.id.btnStartQuiz)
         addQuizButton = findViewById(R.id.btnAddQuiz)
         resetQuizButton = findViewById(R.id.btnResetQuiz)
+        quizListButton = findViewById(R.id.btnQuizList)
 
         // 퀴즈 시작 버튼 클릭 시 동작
         startQuizButton.setOnClickListener {
@@ -44,6 +47,12 @@ class MainActivity : AppCompatActivity() {
         // 퀴즈 초기화 버튼 클릭 시 동작
         resetQuizButton.setOnClickListener {
             showResetConfirmationDialog()
+        }
+
+        // 문제 목록 버튼 클릭 시 동작
+        quizListButton.setOnClickListener {
+            val intent = Intent(this, QuizListActivity::class.java)
+            startActivity(intent)
         }
     }
 

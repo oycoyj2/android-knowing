@@ -26,6 +26,7 @@
         <activity android:name=".ui.quiz.QuizActivity" />
         <activity android:name=".ui.quiz.QuizResultActivity" />
         <activity android:name=".ui.addquiz.AddQuizActivity" />
+        <activity android:name=".ui.quiz.QuizListActivity" />
 
     </application>
 
