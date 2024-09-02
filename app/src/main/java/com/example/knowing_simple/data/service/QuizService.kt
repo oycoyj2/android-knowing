@@ -19,7 +19,7 @@ class QuizService(private val quizDao: QuizDao) {
     }
 
     fun checkAnswer(answer: Boolean): Boolean {
-        val correctAnswer = quizzes[currentQuizIndex].answer.toBoolean()
+        val correctAnswer = quizzes[currentQuizIndex].answer.equals("true", ignoreCase = true)
         if (correctAnswer == answer) {
             correctAnswers++
             return true

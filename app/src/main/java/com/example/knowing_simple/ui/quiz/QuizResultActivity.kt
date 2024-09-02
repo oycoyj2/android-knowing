@@ -17,7 +17,8 @@ class QuizResultActivity : AppCompatActivity() {
 
         val correctAnswers = intent.getIntExtra("correctAnswers", 0)
         val totalQuizzes = intent.getIntExtra("totalQuizzes", 0)
+        val correctAnswer = totalQuizzes - correctAnswers
 
-        resultTextView.text = "너는 $correctAnswers 개 만큼 맞았어. $totalQuizzes 개 중에 말이야!"
+        resultTextView.text = "너는 $correctAnswer 개 만큼 맞았어. $totalQuizzes 개 중에 말이야!"
     }
 }
