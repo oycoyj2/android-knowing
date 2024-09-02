@@ -1,7 +1,11 @@
 package com.example.knowing_simple.ui.quiz
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,13 +21,22 @@ class QuizListActivity : AppCompatActivity() {
 
     private lateinit var quizRecyclerView: RecyclerView
     private lateinit var quizAdapter: QuizAdapter
-    private lateinit var  deleteButton: Button
-    private lateinit var selectAllButton: Button
-    private var isAllSelected = false
+    private lateinit var  editButton: Button
+
+    // ActivityResultLauncher 선언
+    private lateinit var editQuizLauncher: ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_list)
+
+        // ActivityResultLauncher 초기화
+        editQuizLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                // QuizEditActivity에서 문제가 수정된 후 돌아온 경우 데이터를 새로 로드
+                loadQuizData()
+            }
+        }
 
         quizRecyclerView = findViewById(R.id.quizRecyclerView)
         quizRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -31,25 +44,15 @@ class QuizListActivity : AppCompatActivity() {
         quizAdapter = QuizAdapter(listOf(), this)
         quizRecyclerView.adapter = quizAdapter
 
-        deleteButton = findViewById(R.id.deleteButton)
-        selectAllButton = findViewById(R.id.selectAllButton)
+        editButton = findViewById(R.id.editButton)
 
         loadQuizData()
 
-        deleteButton.setOnClickListener{
-            deleteSelectedQuizzes()
+        editButton.setOnClickListener {
+            val intent = Intent(this, QuizEditActivity::class.java)
+            editQuizLauncher.launch(intent)  // 이전의 startActivityForResult 대체
         }
 
-        selectAllButton.setOnClickListener {
-            if (isAllSelected) {
-                quizAdapter.deselectAll()
-                selectAllButton.text = "전체 선택"
-            } else {
-                quizAdapter.selectAll()
-                selectAllButton.text = "전체 해제"
-            }
-            isAllSelected = !isAllSelected
-        }
 
     }
 
@@ -57,7 +60,6 @@ class QuizListActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val quizDao = QuizDatabase.getDatabase(this@QuizListActivity).quizDao()
             val quizList = quizDao.getAllQuizzes() // 모든 퀴즈를 가져옴
-            val questionList = quizList.map { it.question } // 문제 데이터만 추출
 
             withContext(Dispatchers.Main) {
                 quizAdapter.updateData(quizList) // 어댑터에 데이터 업데이트
@@ -65,19 +67,4 @@ class QuizListActivity : AppCompatActivity() {
         }
     }
 
-    private fun deleteSelectedQuizzes() {
-        val selectedIds = quizAdapter.getSelectedQuizIds()
-        if (selectedIds.isNotEmpty()) {
-            CoroutineScope(Dispatchers.IO).launch {
-                val quizDao = QuizDatabase.getDatabase(this@QuizListActivity).quizDao()
-                quizDao.deleteQuizzesByIds(selectedIds.toList()) // 선택된 퀴즈 삭제
-
-                withContext(Dispatchers.Main) {
-                    loadQuizData() // 삭제 후 목록 갱신
-                    isAllSelected = false
-                    selectAllButton.text = "전체 선택"
-                }
-            }
-        }
-    }
 }

@@ -4,25 +4,23 @@
     android:orientation="horizontal"
     android:padding="8dp">
 
-    <!-- 문제 인지 여부를 나타내는 동그라미 -->
-    <View
-        android:id="@+id/knownIndicator"
-        android:layout_width="16dp"
-        android:layout_height="16dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginEnd="8dp" />
+    <!-- 체크박스 (삭제 선택용) -->
+    <CheckBox
+        android:id="@+id/deleteCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical" />
 
-    <Button
-        android:id="@+id/questionButton"
+    <!-- 문제 텍스트 -->
+    <TextView
+        android:id="@+id/questionTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:backgroundTint="@color/knowing_theme_color"
         android:text="Sample Question"
         android:textSize="18sp"
         android:layout_gravity="center_vertical"
         android:paddingStart="8dp"
         android:paddingEnd="8dp" />
-
 
 </LinearLayout>
