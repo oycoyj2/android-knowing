@@ -18,13 +18,17 @@ class CategorySelectionActivity : AppCompatActivity() {
 
     private lateinit var categoryRecyclerView: RecyclerView
     private lateinit var categoryAdapter: CategoryAdapter
+    private lateinit var selectAllButton: Button
     private lateinit var applyButton: Button
+
+    private var isAllSelected = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category_selection)
 
         categoryRecyclerView = findViewById(R.id.categoryRecyclerView)
+        selectAllButton = findViewById(R.id.btnSelectAll)
         applyButton = findViewById(R.id.btnApplySelection)
 
         categoryRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -35,6 +39,17 @@ class CategorySelectionActivity : AppCompatActivity() {
             withContext(Dispatchers.Main) {
                 categoryAdapter = CategoryAdapter(categories)
                 categoryRecyclerView.adapter = categoryAdapter
+            }
+        }
+
+        selectAllButton.setOnClickListener {
+            isAllSelected = !isAllSelected
+            if (isAllSelected) {
+                categoryAdapter.selectAll()
+                selectAllButton.text = "전체 해제"
+            } else {
+                categoryAdapter.deselectAll()
+                selectAllButton.text = "전체 선택"
             }
         }
 

@@ -30,6 +30,17 @@ class CategoryAdapter(private val categories: List<Category>) : RecyclerView.Ada
         return selectedCategoryIds
     }
 
+    fun selectAll() {
+        selectedCategoryIds.clear()
+        categories.forEach { selectedCategoryIds.add(it.id) }
+        notifyDataSetChanged()
+    }
+
+    fun deselectAll() {
+        selectedCategoryIds.clear()
+        notifyDataSetChanged()
+    }
+
     inner class CategoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val categoryCheckBox: CheckBox = itemView.findViewById(R.id.categoryCheckBox)
 
