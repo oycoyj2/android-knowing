@@ -10,17 +10,24 @@
         android:id="@+id/btnStartQuiz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="퀴즈 시작"
+        android:text="모든 문제 풀기"
         android:backgroundTint="@color/knowing_theme_color"
         android:layout_marginBottom="16dp" />
 
+    <Button
+        android:id="@+id/btnStartUnknownQuiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/knowing_theme_color"
+        android:text="모르는 문제만 풀기"
+        android:layout_marginTop="16dp" />
 
     <Button
         android:id="@+id/btnAddQuiz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="퀴즈 추가"
         android:backgroundTint="@color/knowing_theme_color"
+        android:text="퀴즈 추가"
         android:layout_marginBottom="16dp" />
 
     <Button

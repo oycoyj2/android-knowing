@@ -19,8 +19,8 @@ import kotlinx.coroutines.withContext
 class MainActivity : AppCompatActivity() {
 
     private lateinit var startQuizButton: Button
+    private lateinit var startUnknownQuizButton: Button
     private lateinit var addQuizButton: Button
-    private lateinit var resetQuizButton: Button
     private lateinit var quizListButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,12 +29,18 @@ class MainActivity : AppCompatActivity() {
 
         // 버튼 초기화
         startQuizButton = findViewById(R.id.btnStartQuiz)
+        startUnknownQuizButton = findViewById(R.id.btnStartUnknownQuiz)
         addQuizButton = findViewById(R.id.btnAddQuiz)
         quizListButton = findViewById(R.id.btnQuizList)
 
-        // 퀴즈 시작 버튼 클릭 시 동작
+        // 모든 문제 풀기 버튼 클릭 시 동작
         startQuizButton.setOnClickListener {
             checkAndStartQuiz()
+        }
+
+        // 모르는 문제만 풀기 버튼 클릭 시 동작
+        startUnknownQuizButton.setOnClickListener {
+            startQuiz(true)
         }
 
         // 퀴즈 추가 버튼 클릭 시 동작
@@ -79,7 +85,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    
-
+    private fun startQuiz(onlyUnknown: Boolean) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val quizDao = QuizDatabase.getDatabase(this@MainActivity).quizDao()
+            val quizCount = if (onlyUnknown) quizDao.getUnknownQuizCount() else quizDao.getQuizCount()
+            withContext(Dispatchers.Main) {
+                if (quizCount > 0) {
+                    // 퀴즈가 있을 때만 퀴즈 화면으로 이동
+                    val intent = Intent(this@MainActivity, QuizActivity::class.java)
+                    intent.putExtra("onlyUnknown", onlyUnknown)
+                    startActivity(intent)
+                } else {
+                    // 퀴즈가 없을 때 알림 표시
+                    Toast.makeText(this@MainActivity, "해당 조건에 맞는 퀴즈 데이터가 없습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 
 }

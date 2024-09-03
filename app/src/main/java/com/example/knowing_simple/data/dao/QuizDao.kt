@@ -23,6 +23,13 @@ interface QuizDao {
     @Query("DELETE FROM quiz_table WHERE id IN (:ids)")
     suspend fun deleteQuizzesByIds(ids: List<Int>)
 
+    @Query("SELECT * FROM quiz_table WHERE isKnown = 0")
+    suspend fun getUnknownQuizzes(): List<Quiz>
+
+    @Query("SELECT COUNT(*) FROM quiz_table WHERE isKnown = 0")
+    suspend fun getUnknownQuizCount(): Int
+
     @Update
     suspend fun updateQuizzes(quizzes: List<Quiz>) // 퀴즈 상태 업데이트
+
 }

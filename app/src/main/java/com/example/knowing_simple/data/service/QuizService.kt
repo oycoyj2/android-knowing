@@ -9,8 +9,12 @@ class QuizService(private val quizDao: QuizDao) {
     private var currentQuizIndex = 0
     private var quizzes: List<Quiz> = emptyList()
 
-    suspend fun loadQuizzes() {
-        quizzes = quizDao.getAllQuizzes().shuffled() // 퀴즈를 랜덤으로 섞음
+    suspend fun loadQuizzes(onlyUnknown: Boolean) {
+        quizzes = if (onlyUnknown) {
+            quizDao.getUnknownQuizzes().shuffled()
+        } else {
+            quizDao.getAllQuizzes().shuffled()
+        }
     }
 
     fun getCurrentQuiz(): Quiz {
@@ -35,7 +39,8 @@ class QuizService(private val quizDao: QuizDao) {
 
     fun getResult(): Pair<Int, Int> {
         val knownCount = quizzes.count { it.isKnown }
-        return Pair(knownCount, quizzes.size) // 아는 문제 수, 전체 문제 수
+        val totalCount = quizzes.size
+        return Pair(knownCount, totalCount) // 아는 문제 수, 전체 문제 수
     }
 
 }

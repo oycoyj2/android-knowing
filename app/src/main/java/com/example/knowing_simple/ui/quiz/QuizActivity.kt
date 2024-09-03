@@ -38,9 +38,11 @@ class QuizActivity : AppCompatActivity() {
         val quizDao = QuizDatabase.getDatabase(this).quizDao()
         quizService = QuizService(quizDao)
 
+        val onlyUnknown = intent.getBooleanExtra("onlyUnknown", false)
+
         // 퀴즈 로드 및 첫 번째 퀴즈 표시
         CoroutineScope(Dispatchers.IO).launch {
-            quizService.loadQuizzes()
+            quizService.loadQuizzes(onlyUnknown)
             runOnUiThread { showQuiz() }
         }
 
