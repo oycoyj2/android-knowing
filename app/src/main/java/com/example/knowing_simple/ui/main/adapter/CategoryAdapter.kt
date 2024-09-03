@@ -26,8 +26,8 @@ class CategoryAdapter(private val categories: List<Category>) : RecyclerView.Ada
         return categories.size
     }
 
-    fun getSelectedCategories(): Set<Int> {
-        return selectedCategoryIds
+    fun getSelectedCategories(): List<Int> {
+        return selectedCategoryIds.toList()
     }
 
     fun selectAll() {

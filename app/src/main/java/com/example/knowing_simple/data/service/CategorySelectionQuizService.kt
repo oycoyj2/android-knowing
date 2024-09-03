@@ -7,25 +7,28 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 
-class QuizService(private val quizDao: QuizDao) {
+class CategorySelectionQuizService(private val quizDao: QuizDao) {
 
     private var currentQuizIndex = 0
     private var quizzes: List<Quiz> = emptyList()
 
-    suspend fun loadQuizzes(onlyUnknown: Boolean, categoryId: Int? = null) {
-        quizzes = if (categoryId != null) {
-            if (onlyUnknown) {
-                quizDao.getUnknownQuizzesByCategoryId(categoryId).shuffled()
-            } else {
-                quizDao.getQuizzesByCategoryId(categoryId).shuffled()
-            }
-        } else {
+    suspend fun loadQuizzes(onlyUnknown: Boolean, categoryIds: List<Int>?) {
+        // 카테고리 ID가 없거나 빈 경우 모든 카테고리의 퀴즈를 로드
+        quizzes = if (categoryIds == null || categoryIds.isEmpty()) {
             if (onlyUnknown) {
                 quizDao.getUnknownQuizzes().shuffled()
             } else {
                 quizDao.getAllQuizzes().shuffled()
             }
+        } else {
+            // 선택된 카테고리의 퀴즈만 로드
+            if (onlyUnknown) {
+                quizDao.getUnknownQuizzesByCategoryIds(categoryIds).shuffled()
+            } else {
+                quizDao.getQuizzesByCategoryIds(categoryIds).shuffled()
+            }
         }
+        currentQuizIndex = 0
     }
 
     fun getQuizzes(): List<Quiz> {

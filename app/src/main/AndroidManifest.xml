@@ -24,7 +24,8 @@
 
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.main.CategorySelectionActivity" />
-        <activity android:name=".ui.quiz.QuizActivity" />
+        <activity android:name=".ui.quiz.SingleCategoryQuizActivity" />
+        <activity android:name=".ui.quiz.CategorySelectionQuizActivity" />
         <activity android:name=".ui.quiz.QuizResultActivity" />
         <activity android:name=".ui.addquiz.AddQuizActivity" />
         <activity android:name=".ui.quiz.QuizListActivity" />

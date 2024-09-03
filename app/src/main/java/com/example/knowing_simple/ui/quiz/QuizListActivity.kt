@@ -77,7 +77,7 @@ class QuizListActivity : AppCompatActivity() {
     }
 
     private fun startQuiz(categoryId: Int?, onlyUnknown: Boolean) {
-        val intent = Intent(this, QuizActivity::class.java).apply {
+        val intent = Intent(this, SingleCategoryQuizActivity::class.java).apply {
             putExtra("categoryId", categoryId)
             putExtra("onlyUnknown", onlyUnknown)
         }

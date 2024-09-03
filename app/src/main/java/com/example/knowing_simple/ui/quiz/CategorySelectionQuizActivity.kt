@@ -2,6 +2,7 @@ package com.example.knowing_simple.ui.quiz
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
@@ -9,15 +10,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.knowing_simple.R
 import com.example.knowing_simple.data.local.QuizDatabase
-import com.example.knowing_simple.data.service.QuizService
+import com.example.knowing_simple.data.service.CategorySelectionQuizService
+import com.example.knowing_simple.data.service.SingleCategoryQuizService
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-class QuizActivity : AppCompatActivity() {
+class CategorySelectionQuizActivity : AppCompatActivity() {
 
-    private lateinit var quizService: QuizService
+    private lateinit var quizService: CategorySelectionQuizService
     private lateinit var questionTextView: TextView
     private lateinit var yesButton: Button
     private lateinit var noButton: Button
@@ -29,31 +31,30 @@ class QuizActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz)
 
-        val categoryId = intent.getIntExtra("categoryId", -1)
         val onlyUnknown = intent.getBooleanExtra("onlyUnknown", false)
+        val selectedCategoryIds = intent.getIntegerArrayListExtra("selectedCategoryIds")?.toList()
 
-        // View 초기화
+        // 선택된 카테고리 ID가 제대로 전달되고 있는지 확인
+        Log.d("CategorySelectionQuiz", "Selected Category IDs: $selectedCategoryIds")
+        Log.d("CategorySelectionQuiz", "Only Unknown: $onlyUnknown")
+
         questionTextView = findViewById(R.id.questionTextView)
         yesButton = findViewById(R.id.yesButton)
         noButton = findViewById(R.id.noButton)
         answerTextView = findViewById(R.id.answerTextView)
         showAnswerButton = findViewById(R.id.showAnswerButton)
 
-        // QuizService 초기화
         val quizDao = QuizDatabase.getDatabase(this).quizDao()
-        quizService = QuizService(quizDao)
+        quizService = CategorySelectionQuizService(quizDao)
 
-
-        // 퀴즈 로드 및 첫 번째 퀴즈 표시
         CoroutineScope(Dispatchers.IO).launch {
-            quizService.loadQuizzes(onlyUnknown, if (categoryId != -1) categoryId else null)
+            quizService.loadQuizzes(onlyUnknown, selectedCategoryIds ?: listOf())
             withContext(Dispatchers.Main) {
                 if (quizService.getQuizzes().isEmpty()) {
-                    // 퀴즈가 없으면 경고를 띄우고 메인 화면으로 돌아감
-                    Toast.makeText(this@QuizActivity, "모르는 문제가 없습니다.", Toast.LENGTH_SHORT).show()
-                    finish() // 현재 Activity 종료
+                    Toast.makeText(this@CategorySelectionQuizActivity, "모르는 문제가 없습니다.", Toast.LENGTH_SHORT).show()
+                    finish()
                 } else {
-                    showQuiz() // 퀴즈 표시
+                    showQuiz()
                 }
             }
         }
@@ -66,12 +67,10 @@ class QuizActivity : AppCompatActivity() {
             onAnswerSelected(false)
         }
 
-        showAnswerButton.setOnClickListener{
+        showAnswerButton.setOnClickListener {
             toggleAnswerVisibility()
         }
-
     }
-
 
     private fun showQuiz() {
         val currentQuiz = quizService.getCurrentQuiz()
@@ -98,7 +97,7 @@ class QuizActivity : AppCompatActivity() {
         if (!quizService.moveToNextQuiz()) {
             CoroutineScope(Dispatchers.IO).launch {
                 quizService.saveQuizStatus()
-                runOnUiThread{
+                withContext(Dispatchers.Main) {
                     showResult()
                     finish()
                 }

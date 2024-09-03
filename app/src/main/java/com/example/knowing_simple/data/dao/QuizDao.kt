@@ -37,4 +37,10 @@ interface QuizDao {
 
     @Query("SELECT * FROM quiz_table WHERE categoryId = :categoryId AND isKnown = 0")
     suspend fun getUnknownQuizzesByCategoryId(categoryId: Int): List<Quiz>
+
+    @Query("SELECT * FROM quiz_table WHERE categoryId IN (:categoryIds)")
+    suspend fun getQuizzesByCategoryIds(categoryIds: List<Int>): List<Quiz>
+
+    @Query("SELECT * FROM quiz_table WHERE isKnown = 0 AND categoryId IN (:categoryIds)")
+    suspend fun getUnknownQuizzesByCategoryIds(categoryIds: List<Int>): List<Quiz>
 }
