@@ -81,6 +81,7 @@ class MainActivity : AppCompatActivity() {
 
         categorySelectionButton.setOnClickListener {
             val intent = Intent(this, CategorySelectionActivity::class.java)
+            intent.putIntegerArrayListExtra("selectedCategoryIds", ArrayList(selectedCategoryIds ?: emptyList()))
             categorySelectionLauncher.launch(intent)
         }
     }

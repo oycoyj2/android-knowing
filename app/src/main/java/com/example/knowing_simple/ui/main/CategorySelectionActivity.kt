@@ -22,10 +22,13 @@ class CategorySelectionActivity : AppCompatActivity() {
     private lateinit var applyButton: Button
 
     private var isAllSelected = false
+    private var selectedCategoryIds: Set<Int> = emptySet()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_category_selection)
+
+        selectedCategoryIds = intent.getIntegerArrayListExtra("selectedCategoryIds")?.toSet() ?: emptySet()
 
         categoryRecyclerView = findViewById(R.id.categoryRecyclerView)
         selectAllButton = findViewById(R.id.btnSelectAll)
@@ -37,7 +40,7 @@ class CategorySelectionActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             val categories = categoryDao.getAllCategories()
             withContext(Dispatchers.Main) {
-                categoryAdapter = CategoryAdapter(categories)
+                categoryAdapter = CategoryAdapter(categories, selectedCategoryIds)
                 categoryRecyclerView.adapter = categoryAdapter
             }
         }

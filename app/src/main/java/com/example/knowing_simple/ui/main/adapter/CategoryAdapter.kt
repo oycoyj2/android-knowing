@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.knowing_simple.R
 import com.example.knowing_simple.data.model.Category
 
-class CategoryAdapter(private val categories: List<Category>) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
+class CategoryAdapter(private val categories: List<Category>, private val initiallySelectedCategoryIds: Set<Int>) : RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
-    private val selectedCategoryIds = mutableSetOf<Int>()
+    private val selectedCategoryIds = initiallySelectedCategoryIds.toMutableSet()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_category_selection, parent, false)
@@ -26,8 +26,8 @@ class CategoryAdapter(private val categories: List<Category>) : RecyclerView.Ada
         return categories.size
     }
 
-    fun getSelectedCategories(): List<Int> {
-        return selectedCategoryIds.toList()
+    fun getSelectedCategories(): Set<Int> {
+        return selectedCategoryIds
     }
 
     fun selectAll() {
