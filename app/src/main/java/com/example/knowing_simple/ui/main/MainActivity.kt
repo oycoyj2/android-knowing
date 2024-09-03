@@ -81,7 +81,7 @@ class MainActivity : AppCompatActivity() {
 
         categorySelectionButton.setOnClickListener {
             val intent = Intent(this, CategorySelectionActivity::class.java)
-            startActivity(intent)
+            categorySelectionLauncher.launch(intent)
         }
     }
 
