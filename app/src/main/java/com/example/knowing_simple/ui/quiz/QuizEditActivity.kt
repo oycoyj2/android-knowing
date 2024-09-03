@@ -23,10 +23,13 @@ class QuizEditActivity : AppCompatActivity() {
     private lateinit var deleteButton: Button
     private lateinit var selectAllButton: Button
     private var isAllSelected = false
+    private var categoryId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_quiz_edit)
+
+        categoryId = intent.getIntExtra("categoryId", -1)
 
         quizRecyclerView = findViewById(R.id.quizRecyclerView)
         quizRecyclerView.layoutManager = LinearLayoutManager(this)
@@ -58,7 +61,11 @@ class QuizEditActivity : AppCompatActivity() {
     private fun loadQuizData() {
         CoroutineScope(Dispatchers.IO).launch {
             val quizDao = QuizDatabase.getDatabase(this@QuizEditActivity).quizDao()
-            val quizList = quizDao.getAllQuizzes()
+            val quizList = if (categoryId != -1) {
+                quizDao.getQuizzesByCategoryId(categoryId) // 특정 카테고리의 퀴즈만 가져옴
+            } else {
+                quizDao.getAllQuizzes() // 기본값으로 전체 퀴즈를 가져옴
+            }
 
             withContext(Dispatchers.Main) {
                 quizAdapter.updateData(quizList)

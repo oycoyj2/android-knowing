@@ -53,6 +53,7 @@ class QuizListActivity : AppCompatActivity() {
 
         editButton.setOnClickListener {
             val intent = Intent(this, QuizEditActivity::class.java)
+            intent.putExtra("categoryId", categoryId)
             editQuizLauncher.launch(intent)  // 이전의 startActivityForResult 대체
         }
 
