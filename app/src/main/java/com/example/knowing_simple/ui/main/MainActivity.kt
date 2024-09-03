@@ -79,20 +79,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun showResetConfirmationDialog() {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("퀴즈 초기화")
-        builder.setMessage("정말로 모든 퀴즈 데이터를 초기화하시겠습니까?")
-        builder.setPositiveButton("네") { dialog, _ ->
-            resetQuizData()
-            dialog.dismiss()
-        }
-        builder.setNegativeButton("아니요") { dialog, _ ->
-            dialog.dismiss() // 사용자가 "아니요"를 누르면 대화상자 닫기
-        }
-        val dialog = builder.create()
-        dialog.show()
-    }
+    
 
 
 }
