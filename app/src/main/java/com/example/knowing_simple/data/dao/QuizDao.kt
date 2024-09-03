@@ -32,4 +32,6 @@ interface QuizDao {
     @Update
     suspend fun updateQuizzes(quizzes: List<Quiz>) // 퀴즈 상태 업데이트
 
+    @Query("SELECT * FROM quiz_table WHERE categoryId = :categoryId")
+    suspend fun getQuizzesByCategoryId(categoryId: Int): List<Quiz> // 카테고리 ID로 퀴즈 가져오기
 }

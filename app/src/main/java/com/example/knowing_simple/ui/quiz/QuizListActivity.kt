@@ -23,6 +23,8 @@ class QuizListActivity : AppCompatActivity() {
     private lateinit var quizAdapter: QuizAdapter
     private lateinit var  editButton: Button
 
+    private var categoryId: Int? = null
+
     // ActivityResultLauncher 선언
     private lateinit var editQuizLauncher: ActivityResultLauncher<Intent>
 
@@ -46,6 +48,7 @@ class QuizListActivity : AppCompatActivity() {
 
         editButton = findViewById(R.id.editButton)
 
+        categoryId = intent.getIntExtra("categoryId", -1)
         loadQuizData()
 
         editButton.setOnClickListener {
@@ -59,7 +62,11 @@ class QuizListActivity : AppCompatActivity() {
     private fun loadQuizData() {
         CoroutineScope(Dispatchers.IO).launch {
             val quizDao = QuizDatabase.getDatabase(this@QuizListActivity).quizDao()
-            val quizList = quizDao.getAllQuizzes() // 모든 퀴즈를 가져옴
+            val quizList = if (categoryId != null && categoryId != -1) {
+                quizDao.getQuizzesByCategoryId(categoryId!!) // 카테고리에 맞는 퀴즈를 가져옴
+            } else {
+                quizDao.getAllQuizzes() // 모든 퀴즈를 가져옴
+            }
 
             withContext(Dispatchers.Main) {
                 quizAdapter.updateData(quizList) // 어댑터에 데이터 업데이트
