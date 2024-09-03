@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var quizListButton: Button
     private lateinit var category1Button: Button
     private lateinit var category2Button: Button
+    private lateinit var categorySelectionButton: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         quizListButton = findViewById(R.id.btnQuizList)
         category1Button = findViewById(R.id.btnCategory1)
         category2Button = findViewById(R.id.btnCategory2)
+        categorySelectionButton = findViewById(R.id.btnCategorySelection)
 
         // 모든 문제 풀기 버튼 클릭 시 동작
         startQuizButton.setOnClickListener {
@@ -70,6 +72,11 @@ class MainActivity : AppCompatActivity() {
         category2Button.setOnClickListener {
             val intent = Intent(this, QuizListActivity::class.java)
             intent.putExtra("categoryId", 2)
+            startActivity(intent)
+        }
+
+        categorySelectionButton.setOnClickListener {
+            val intent = Intent(this, CategorySelectionActivity::class.java)
             startActivity(intent)
         }
     }
