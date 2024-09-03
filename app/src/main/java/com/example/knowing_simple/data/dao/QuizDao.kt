@@ -34,4 +34,7 @@ interface QuizDao {
 
     @Query("SELECT * FROM quiz_table WHERE categoryId = :categoryId")
     suspend fun getQuizzesByCategoryId(categoryId: Int): List<Quiz> // 카테고리 ID로 퀴즈 가져오기
+
+    @Query("SELECT * FROM quiz_table WHERE categoryId = :categoryId AND isKnown = 0")
+    suspend fun getUnknownQuizzesByCategoryId(categoryId: Int): List<Quiz>
 }

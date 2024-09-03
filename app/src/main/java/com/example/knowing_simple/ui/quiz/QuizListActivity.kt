@@ -22,6 +22,8 @@ class QuizListActivity : AppCompatActivity() {
     private lateinit var quizRecyclerView: RecyclerView
     private lateinit var quizAdapter: QuizAdapter
     private lateinit var  editButton: Button
+    private lateinit var startCategoryQuizButton: Button
+    private lateinit var startUnknownCategoryQuizButton: Button
 
     private var categoryId: Int? = null
 
@@ -47,6 +49,8 @@ class QuizListActivity : AppCompatActivity() {
         quizRecyclerView.adapter = quizAdapter
 
         editButton = findViewById(R.id.editButton)
+        startCategoryQuizButton = findViewById(R.id.startCategoryQuizButton)
+        startUnknownCategoryQuizButton = findViewById(R.id.startUnknownCategoryQuizButton)
 
         categoryId = intent.getIntExtra("categoryId", -1)
         loadQuizData()
@@ -57,7 +61,27 @@ class QuizListActivity : AppCompatActivity() {
             editQuizLauncher.launch(intent)  // 이전의 startActivityForResult 대체
         }
 
+        startCategoryQuizButton.setOnClickListener {
+            startQuiz(categoryId, onlyUnknown = false)
+        }
 
+        startUnknownCategoryQuizButton.setOnClickListener {
+            startQuiz(categoryId, onlyUnknown = true)
+        }
+
+    }
+
+    override fun onResume() {
+        super.onResume()
+        loadQuizData() // 액티비티가 다시 활성화될 때 데이터를 새로고침
+    }
+
+    private fun startQuiz(categoryId: Int?, onlyUnknown: Boolean) {
+        val intent = Intent(this, QuizActivity::class.java).apply {
+            putExtra("categoryId", categoryId)
+            putExtra("onlyUnknown", onlyUnknown)
+        }
+        startActivity(intent)
     }
 
     private fun loadQuizData() {
