@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.knowing_simple.R
 import com.example.knowing_simple.data.local.QuizDatabase
+import com.example.knowing_simple.ui.addquiz.AddQuizActivityWithoutCategory
 import com.example.knowing_simple.ui.quiz.adapter.QuizAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -24,6 +25,7 @@ class QuizListActivity : AppCompatActivity() {
     private lateinit var  editButton: Button
     private lateinit var startCategoryQuizButton: Button
     private lateinit var startUnknownCategoryQuizButton: Button
+    private lateinit var addQuizButton: Button
 
     private var categoryId: Int? = null
 
@@ -53,6 +55,13 @@ class QuizListActivity : AppCompatActivity() {
         startUnknownCategoryQuizButton = findViewById(R.id.startUnknownCategoryQuizButton)
 
         categoryId = intent.getIntExtra("categoryId", -1)
+
+        addQuizButton = findViewById(R.id.addQuizButton)
+        addQuizButton.setOnClickListener{
+            val intent = Intent(this, AddQuizActivityWithoutCategory::class.java)
+            intent.putExtra("categoryId", categoryId)
+            startActivity(intent)
+        }
         loadQuizData()
 
         editButton.setOnClickListener {

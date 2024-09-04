@@ -28,6 +28,7 @@
         <activity android:name=".ui.quiz.CategorySelectionQuizActivity" />
         <activity android:name=".ui.quiz.QuizResultActivity" />
         <activity android:name=".ui.addquiz.AddQuizActivity" />
+        <activity android:name=".ui.addquiz.AddQuizActivityWithoutCategory" />
         <activity android:name=".ui.quiz.QuizListActivity" />
         <activity android:name=".ui.quiz.QuizDetailActivity" />
         <activity android:name=".ui.quiz.QuizEditActivity" />

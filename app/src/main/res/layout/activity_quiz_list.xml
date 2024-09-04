@@ -19,6 +19,15 @@
             android:layout_centerVertical="true"/>
 
         <Button
+            android:id="@+id/addQuizButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="문제 추가"
+            android:layout_toStartOf="@id/editButton"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="8dp" />
+
+        <Button
             android:id="@+id/editButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
