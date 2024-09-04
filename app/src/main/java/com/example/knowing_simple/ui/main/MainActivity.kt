@@ -25,6 +25,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var addQuizButton: Button
     private lateinit var category1Button: Button
     private lateinit var category2Button: Button
+    private lateinit var category3Button: Button
+    private lateinit var category4Button: Button
+    private lateinit var category5Button: Button
+    private lateinit var category6Button: Button
     private lateinit var categorySelectionButton: Button
 
     private var selectedCategoryIds: List<Int>? = null
@@ -39,6 +43,10 @@ class MainActivity : AppCompatActivity() {
         addQuizButton = findViewById(R.id.btnAddQuiz)
         category1Button = findViewById(R.id.btnCategory1)
         category2Button = findViewById(R.id.btnCategory2)
+        category3Button = findViewById(R.id.btnCategory3)
+        category4Button = findViewById(R.id.btnCategory4)
+        category5Button = findViewById(R.id.btnCategory5)
+        category6Button = findViewById(R.id.btnCategory6)
         categorySelectionButton = findViewById(R.id.btnCategorySelection)
 
 
@@ -76,6 +84,32 @@ class MainActivity : AppCompatActivity() {
             intent.putExtra("categoryId", 2)
             startActivity(intent)
         }
+
+        category3Button.setOnClickListener {
+            val intent = Intent(this, QuizListActivity::class.java)
+            intent.putExtra("categoryId", 3)
+            startActivity(intent)
+        }
+
+        category4Button.setOnClickListener {
+            val intent = Intent(this, QuizListActivity::class.java)
+            intent.putExtra("categoryId", 4)
+            startActivity(intent)
+        }
+
+        category5Button.setOnClickListener {
+            val intent = Intent(this, QuizListActivity::class.java)
+            intent.putExtra("categoryId", 5)
+            startActivity(intent)
+        }
+
+        category6Button.setOnClickListener {
+            val intent = Intent(this, QuizListActivity::class.java)
+            intent.putExtra("categoryId", 6)
+            startActivity(intent)
+        }
+
+
 
     }
 

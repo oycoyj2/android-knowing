@@ -38,11 +38,15 @@ abstract class QuizDatabase : RoomDatabase() {
                             CoroutineScope(Dispatchers.IO).launch {
                                 getDatabase(context).categoryDao().insertCategory(Category(name = "카테고리1"))
                                 getDatabase(context).categoryDao().insertCategory(Category(name = "카테고리2"))
+                                getDatabase(context).categoryDao().insertCategory(Category(name = "카테고리3"))
+                                getDatabase(context).categoryDao().insertCategory(Category(name = "카테고리4"))
+                                getDatabase(context).categoryDao().insertCategory(Category(name = "카테고리5"))
+                                getDatabase(context).categoryDao().insertCategory(Category(name = "카테고리6"))
                                 // 필요한 다른 기본 카테고리들도 여기에서 추가할 수 있습니다.
                             }
                         }
                     })
-//                    .fallbackToDestructiveMigration() // 데이터베이스 스키마가 변경될 때 초기화
+                    .fallbackToDestructiveMigration() // 데이터베이스 스키마가 변경될 때 초기화
                     .build()
                 INSTANCE = instance
                 instance
