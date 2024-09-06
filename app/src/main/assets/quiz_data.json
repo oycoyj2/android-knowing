@@ -1,0 +1,62 @@
+[
+  {
+    "question": "카테고리 1 질문 1",
+    "answer": "카테고리 1 정답 1",
+    "categoryId": 1
+  },
+  {
+    "question": "카테고리 1 질문 2",
+    "answer": "카테고리 1 정답 2",
+    "categoryId": 1
+  },
+  {
+    "question": "카테고리 2 질문 1",
+    "answer": "카테고리 2 정답 1",
+    "categoryId": 2
+  },
+  {
+    "question": "카테고리 2 질문 2",
+    "answer": "카테고리 2 정답 2",
+    "categoryId": 2
+  },
+  {
+    "question": "카테고리 3 질문 1",
+    "answer": "카테고리 3 정답 1",
+    "categoryId": 3
+  },
+  {
+    "question": "카테고리 3 질문 2",
+    "answer": "카테고리 3 정답 2",
+    "categoryId": 3
+  },
+  {
+    "question": "카테고리 4 질문 1",
+    "answer": "카테고리 4 정답 1",
+    "categoryId": 4
+  },
+  {
+    "question": "카테고리 4 질문 2",
+    "answer": "카테고리 4 정답 2",
+    "categoryId": 4
+  },
+  {
+    "question": "카테고리 5 질문 1",
+    "answer": "카테고리 5 정답 1",
+    "categoryId": 5
+  },
+  {
+    "question": "카테고리 5 질문 2",
+    "answer": "카테고리 5 정답 2",
+    "categoryId": 5
+  },
+  {
+    "question": "카테고리 6 질문 1",
+    "answer": "카테고리 6 정답 1",
+    "categoryId": 6
+  },
+  {
+    "question": "카테고리 6 질문 2",
+    "answer": "카테고리 6 정답 2",
+    "categoryId": 6
+  }
+]

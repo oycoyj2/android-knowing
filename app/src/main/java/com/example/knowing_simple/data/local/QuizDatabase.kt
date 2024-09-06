@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.example.knowing_simple.data.dao.CategoryDao
 import com.example.knowing_simple.data.dao.QuizDao
@@ -36,20 +35,34 @@ abstract class QuizDatabase : RoomDatabase() {
                             super.onCreate(db)
                             // 여기서 기본 카테고리를 추가합니다.
                             CoroutineScope(Dispatchers.IO).launch {
-                                getDatabase(context).categoryDao().insertCategory(Category(name = "카테고리1"))
-                                getDatabase(context).categoryDao().insertCategory(Category(name = "카테고리2"))
-                                getDatabase(context).categoryDao().insertCategory(Category(name = "카테고리3"))
-                                getDatabase(context).categoryDao().insertCategory(Category(name = "카테고리4"))
-                                getDatabase(context).categoryDao().insertCategory(Category(name = "카테고리5"))
-                                getDatabase(context).categoryDao().insertCategory(Category(name = "카테고리6"))
-                                // 필요한 다른 기본 카테고리들도 여기에서 추가할 수 있습니다.
+                                val categoryDao = getDatabase(context).categoryDao()
+                                val quizDao = getDatabase(context).quizDao()
+
+                                // 기본 카테고리를 추가
+                                populateInitialCategories(categoryDao)
+
+                                // JSON 파일에서 데이터를 로드하고 퀴즈를 추가
+                                QuizDataLoader.insertQuizzesFromJson(context, quizDao)
                             }
                         }
+
+
                     })
                     .fallbackToDestructiveMigration() // 데이터베이스 스키마가 변경될 때 초기화
                     .build()
                 INSTANCE = instance
                 instance
+            }
+        }
+
+        suspend fun populateInitialCategories(categoryDao: CategoryDao) {
+            if (categoryDao.getCategoryCount() == 0) {
+                categoryDao.insertCategory(Category(1, "카테고리 1"))
+                categoryDao.insertCategory(Category(2, "카테고리 2"))
+                categoryDao.insertCategory(Category(3, "카테고리 3"))
+                categoryDao.insertCategory(Category(4, "카테고리 4"))
+                categoryDao.insertCategory(Category(5, "카테고리 5"))
+                categoryDao.insertCategory(Category(6, "카테고리 6"))
             }
         }
     }

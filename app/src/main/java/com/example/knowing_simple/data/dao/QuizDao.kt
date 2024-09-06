@@ -2,6 +2,7 @@ package com.example.knowing_simple.data.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.knowing_simple.data.model.Quiz
@@ -43,4 +44,10 @@ interface QuizDao {
 
     @Query("SELECT * FROM quiz_table WHERE isKnown = 0 AND categoryId IN (:categoryIds)")
     suspend fun getUnknownQuizzesByCategoryIds(categoryIds: List<Int>): List<Quiz>
+
+    @Query("SELECT COUNT(*) FROM quiz_table WHERE categoryId = :categoryId")
+    suspend fun getQuizCountByCategory(categoryId: Int): Int
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(quizzes: List<Quiz>)
 }
