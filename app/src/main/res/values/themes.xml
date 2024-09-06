@@ -1,9 +1,21 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Knowingsimple" parent="Theme.Material3.DayNight.NoActionBar">
+    <style name="Base.Theme.KnowingMainTheme" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/knowing_theme_color</item>
     </style>
 
-    <style name="Theme.Knowingsimple" parent="Base.Theme.Knowingsimple" />
+    <style name="Theme.KnowingMainTheme" parent="Base.Theme.KnowingMainTheme" />
+
+    <!-- 스플래시 화면 테마 -->
+    <style name="SplashScreenTheme" parent="Theme.KnowingMainTheme">
+        <!-- 스플래시 화면 배경색 설정 -->
+        <item name="windowSplashScreenBackground">@color/knowing_theme_color</item>
+        <!-- 스플래시 화면 로고 설정 -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/knowing_logo</item>
+        <!-- 스플래시 이후 적용될 기본 테마 설정 -->
+        <item name="postSplashScreenTheme">@style/Theme.KnowingMainTheme</item>
+    </style>
+
+
 </resources>
