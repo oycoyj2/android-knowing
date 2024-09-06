@@ -54,4 +54,5 @@ dependencies {
     implementation(libs.room.ktx)
     ksp(libs.room.compiler.ksp)
     implementation(libs.gson)
+    implementation(libs.core.splashscreen)
 }
