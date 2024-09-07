@@ -1,0 +1,8 @@
+<!-- res/drawable/button_border.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 배경색 (필요에 따라 투명으로 설정 가능) -->
+    <solid android:color="#00000000"/> <!-- 배경색 (예: 흰색) -->
+
+    <!-- 버튼 모서리 둥글게 하기 -->
+    <corners android:radius="10dp"/> <!-- 모서리 둥글게 (예: 8dp) -->
+</shape>
