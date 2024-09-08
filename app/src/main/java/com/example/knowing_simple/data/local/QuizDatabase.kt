@@ -58,11 +58,11 @@ abstract class QuizDatabase : RoomDatabase() {
         suspend fun populateInitialCategories(categoryDao: CategoryDao) {
             if (categoryDao.getCategoryCount() == 0) {
                 categoryDao.insertCategory(Category(1, "컴퓨터 구조"))
-                categoryDao.insertCategory(Category(2, "운영체제"))
-                categoryDao.insertCategory(Category(3, "데이터베이스"))
-                categoryDao.insertCategory(Category(4, "네트워크"))
-                categoryDao.insertCategory(Category(5, "자료구조"))
-                categoryDao.insertCategory(Category(6, "알고리즘"))
+                categoryDao.insertCategory(Category(2, "네트워크"))
+                categoryDao.insertCategory(Category(3, "운영체제"))
+                categoryDao.insertCategory(Category(4, "자료구조"))
+                categoryDao.insertCategory(Category(5, "알고리즘"))
+                categoryDao.insertCategory(Category(6, "데이터베이스"))
             }
         }
     }

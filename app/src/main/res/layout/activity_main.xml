@@ -84,7 +84,7 @@
             android:fontFamily="@font/nanum_myeongjo"
             android:paddingStart="0dp"
             android:paddingEnd="10dp"
-            android:text="• 운영체제"
+            android:text="• 네트워크"
             android:textColor="@color/knowing_sub_color"
             android:textSize="24sp" />
 
@@ -96,7 +96,7 @@
             android:fontFamily="@font/nanum_myeongjo"
             android:paddingStart="0dp"
             android:paddingEnd="10dp"
-            android:text="• 데이터베이스"
+            android:text="• 운영체제"
             android:textColor="@color/knowing_sub_color"
             android:textSize="24sp" />
 
@@ -108,7 +108,7 @@
             android:fontFamily="@font/nanum_myeongjo"
             android:paddingStart="0dp"
             android:paddingEnd="10dp"
-            android:text="• 네트워크"
+            android:text="• 자료구조"
             android:textColor="@color/knowing_sub_color"
             android:textSize="24sp" />
 
@@ -120,7 +120,7 @@
             android:fontFamily="@font/nanum_myeongjo"
             android:paddingStart="0dp"
             android:paddingEnd="10dp"
-            android:text="• 자료구조"
+            android:text="• 알고리즘"
             android:textColor="@color/knowing_sub_color"
             android:textSize="24sp" />
 
@@ -132,7 +132,7 @@
             android:fontFamily="@font/nanum_myeongjo"
             android:paddingStart="0dp"
             android:paddingEnd="10dp"
-            android:text="• 알고리즘"
+            android:text="• 데이터베이스"
             android:textColor="@color/knowing_sub_color"
             android:textSize="24sp" />
     </LinearLayout>
