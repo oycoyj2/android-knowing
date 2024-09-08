@@ -2,10 +2,13 @@ package com.example.knowing_simple.ui.quiz
 
 import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -39,7 +42,7 @@ class CategorySelectionQuizActivity : AppCompatActivity() {
         Log.d("CategorySelectionQuiz", "Selected Category IDs: $selectedCategoryIds")
         Log.d("CategorySelectionQuiz", "Only Unknown: $onlyUnknown")
 
-        questionTextView = findViewById(R.id.questionTextView)
+        questionTextView = findViewById<TextView>(R.id.questionTextView)
         yesButton = findViewById(R.id.yesButton)
         noButton = findViewById(R.id.noButton)
         showAnswerButton = findViewById(R.id.showAnswerButton)
@@ -82,6 +85,8 @@ class CategorySelectionQuizActivity : AppCompatActivity() {
     private fun showAnswerDialog() {
         // Dialog 생성 및 설정
         val dialog = Dialog(this)
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_answer, null)
 
         dialog.setContentView(dialogView)
