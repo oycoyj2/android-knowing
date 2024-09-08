@@ -1,30 +1,73 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@color/knowing_theme_color">
 
-    <Button
-        android:id="@+id/btnSelectAll"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="전체 선택"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp" />
+    <!-- 상단 타이틀 이미지 -->
+    <ImageView
+        android:id="@+id/imgTitle"
+        android:layout_width="180dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="222dp"
+        android:src="@drawable/knowing_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/categoryRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="28dp"
         android:layout_weight="1"
-        android:orientation="vertical" />
+        android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@id/imgTitle"
+        tools:layout_editor_absoluteX="30dp" />
 
-    <Button
-        android:id="@+id/btnApplySelection"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="적용"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp" />
-</LinearLayout>
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="40dp">
+
+        <android.widget.Button
+            android:id="@+id/btnSelectAll"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="20dp"
+            android:layout_weight="1"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:background="@drawable/button_white"
+            android:fontFamily="@font/nanum_myeongjo"
+            android:text="전체 선택"
+            android:textColor="@color/knowing_orange_color"
+            android:textSize="22sp" />
+
+        <android.widget.Button
+            android:id="@+id/btnApplySelection"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_white"
+            android:fontFamily="@font/nanum_myeongjo"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:text="적용하기"
+            android:textColor="@color/knowing_orange_color"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
