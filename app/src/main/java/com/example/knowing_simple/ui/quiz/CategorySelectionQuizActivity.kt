@@ -12,6 +12,8 @@ import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.knowing_simple.R
 import com.example.knowing_simple.data.local.QuizDatabase
@@ -30,6 +32,7 @@ class CategorySelectionQuizActivity : AppCompatActivity() {
     private lateinit var showAnswerButton: Button
 
     private var currentAnswer: String = ""
+    private var currentIsKnown: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,9 +41,6 @@ class CategorySelectionQuizActivity : AppCompatActivity() {
         val onlyUnknown = intent.getBooleanExtra("onlyUnknown", false)
         val selectedCategoryIds = intent.getIntegerArrayListExtra("selectedCategoryIds")?.toList()
 
-        // 선택된 카테고리 ID가 제대로 전달되고 있는지 확인
-        Log.d("CategorySelectionQuiz", "Selected Category IDs: $selectedCategoryIds")
-        Log.d("CategorySelectionQuiz", "Only Unknown: $onlyUnknown")
 
         questionTextView = findViewById<TextView>(R.id.questionTextView)
         yesButton = findViewById(R.id.yesButton)
@@ -73,6 +73,13 @@ class CategorySelectionQuizActivity : AppCompatActivity() {
         showAnswerButton.setOnClickListener {
             showAnswerDialog()
         }
+
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                // 퀴즈 종료 여부를 묻는 확인 다이얼로그 표시
+                showQuitConfirmationDialog()
+            }
+        })
     }
 
     private fun showQuiz() {
@@ -119,6 +126,37 @@ class CategorySelectionQuizActivity : AppCompatActivity() {
             }
         } else {
             showQuiz()
+        }
+    }
+
+    private fun showQuitConfirmationDialog() {
+        // 확인 다이얼로그 생성
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("퀴즈 종료")
+        builder.setMessage("정말로 퀴즈를 그만두시겠습니까?\n(현재까지 푼 문제의 상태는 저장됩니다)")
+
+        // "예" 버튼 클릭 시 퀴즈 상태 저장 후 종료
+        builder.setPositiveButton("예") { _, _ ->
+            saveQuizStateAndExit()
+        }
+
+        // "아니오" 버튼 클릭 시 다이얼로그만 닫기
+        builder.setNegativeButton("아니오") { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        // 다이얼로그 표시
+        builder.show()
+    }
+
+    private fun saveQuizStateAndExit() {
+        // 현재 문제 상태 저장
+        quizService.updateQuizStatus(currentIsKnown)
+        CoroutineScope(Dispatchers.IO).launch {
+            quizService.saveQuizStatus()
+            runOnUiThread {
+                finish() // 액티비티 종료
+            }
         }
     }
 
