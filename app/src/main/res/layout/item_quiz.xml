@@ -4,7 +4,7 @@
     android:orientation="horizontal"
     android:padding="8dp">
 
-    <!-- 문제 인지 여부를 나타내는 동그라미 -->
+    <!-- 문제 인지 여부를 나타내는 체크박스 -->
     <View
         android:id="@+id/knownIndicator"
         android:layout_width="16dp"
@@ -17,9 +17,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:backgroundTint="@color/knowing_theme_color"
         android:text="Sample Question"
-        android:textSize="18sp"
+        android:backgroundTint="#00000000"
+        android:textColor="@color/knowing_sub_color"
+        android:fontFamily="@font/nanum_myeongjo"
+        android:textSize="14sp"
+        android:gravity="start"
         android:layout_gravity="center_vertical"
         android:paddingStart="8dp"
         android:paddingEnd="8dp" />

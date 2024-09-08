@@ -19,4 +19,7 @@ interface CategoryDao {
 
     @Query("SELECT COUNT(*) FROM quiz_table WHERE categoryId = :categoryId")
     suspend fun getQuizCountForCategory(categoryId: Int): Int
+
+    @Query("SELECT name FROM category_table WHERE id = :categoryId")
+    suspend fun getCategoryNameById(categoryId: Int): String?
 }

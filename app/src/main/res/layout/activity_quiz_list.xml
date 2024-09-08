@@ -1,67 +1,122 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@color/knowing_theme_color">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <!-- 상단 타이틀 이미지 -->
+    <ImageView
+        android:id="@+id/imgTitle"
+        android:layout_width="180dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="222dp"
+        android:src="@drawable/knowing_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/titleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="문제 목록"
-            android:textSize="24sp"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true"/>
-
-        <Button
-            android:id="@+id/addQuizButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="문제 추가"
-            android:layout_toStartOf="@id/editButton"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="8dp" />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.77"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <Button
             android:id="@+id/editButton"
-            android:layout_width="wrap_content"
+            android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text="편집"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"/>
-    </RelativeLayout>
+            android:layout_marginEnd="0dp"
+            android:fontFamily="@font/nanum_myeongjo"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:text="문제 삭제"
+            android:textColor="@color/knowing_sub_color"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/addQuizButton"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_myeongjo"
+            android:paddingLeft="2dp"
+            android:paddingRight="2dp"
+            android:text="문제 추가"
+            android:textColor="@color/knowing_sub_color"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/categoryNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/nanum_myeongjo"
+        android:gravity="center"
+        android:padding="8dp"
+        android:textColor="@color/knowing_sub_color"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imgTitle" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/quizRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="28dp"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        app:layout_constraintTop_toBottomOf="@id/categoryNameTextView"
+        tools:layout_editor_absoluteX="30dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center_horizontal">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="40dp">
 
-        <Button
+        <android.widget.Button
             android:id="@+id/startCategoryQuizButton"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="모든 문제 풀기"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="20dp"
             android:layout_weight="1"
-            android:layout_marginEnd="8dp" />
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
+            android:background="@drawable/button_white"
+            android:fontFamily="@font/nanum_myeongjo"
+            android:text="모든 문제 풀기"
+            android:textColor="@color/knowing_orange_color"
+            android:textSize="18sp" />
 
-        <Button
+        <android.widget.Button
             android:id="@+id/startUnknownCategoryQuizButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_white"
+            android:fontFamily="@font/nanum_myeongjo"
+            android:paddingTop="20dp"
+            android:paddingBottom="20dp"
             android:text="모르는 문제만 풀기"
-            android:layout_weight="1" />
+            android:textColor="@color/knowing_orange_color"
+            android:textSize="18sp" />
     </LinearLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/quizRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="16dp"/>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -26,6 +27,7 @@ class QuizListActivity : AppCompatActivity() {
     private lateinit var startCategoryQuizButton: Button
     private lateinit var startUnknownCategoryQuizButton: Button
     private lateinit var addQuizButton: Button
+    private lateinit var categoryNameTextView: TextView
 
     private var categoryId: Int? = null
 
@@ -47,6 +49,8 @@ class QuizListActivity : AppCompatActivity() {
         quizRecyclerView = findViewById(R.id.quizRecyclerView)
         quizRecyclerView.layoutManager = LinearLayoutManager(this)
 
+        categoryNameTextView = findViewById(R.id.categoryNameTextView)
+
         quizAdapter = QuizAdapter(listOf(), this)
         quizRecyclerView.adapter = quizAdapter
 
@@ -64,6 +68,8 @@ class QuizListActivity : AppCompatActivity() {
         }
         loadQuizData()
 
+        loadCategoryName()
+
         editButton.setOnClickListener {
             val intent = Intent(this, QuizEditActivity::class.java)
             intent.putExtra("categoryId", categoryId)
@@ -78,6 +84,20 @@ class QuizListActivity : AppCompatActivity() {
             startQuiz(categoryId, onlyUnknown = true)
         }
 
+    }
+
+    private fun loadCategoryName() {
+        if (categoryId != null && categoryId != -1) {
+            CoroutineScope(Dispatchers.IO).launch {
+                val categoryDao = QuizDatabase.getDatabase(this@QuizListActivity).categoryDao()
+                val categoryName = categoryDao.getCategoryNameById(categoryId!!)
+
+                withContext(Dispatchers.Main) {
+                    val displayName = "• ${categoryName ?: "Unknown Category"}"
+                    categoryNameTextView.text = displayName
+                }
+            }
+        }
     }
 
     override fun onResume() {
