@@ -41,9 +41,9 @@ class QuizAdapter(private var quizList: List<Quiz>, private val context: Context
 
             knownIndicator.visibility = View.VISIBLE
             if (quiz.isKnown) {
-                knownIndicator.setBackgroundResource(R.drawable.circle_filled)
+                knownIndicator.setBackgroundResource(R.drawable.checkbox_checked)
             } else {
-                knownIndicator.setBackgroundResource(R.drawable.circle_empty)
+                knownIndicator.setBackgroundResource(R.drawable.checkbox_unchecked)
             }
 
             questionButton.setOnClickListener {

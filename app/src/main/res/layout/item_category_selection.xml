@@ -1,13 +1,35 @@
+<!-- res/layout/item_category.xml -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/categoryItemLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="8dp">
+    android:padding="12dp"
+    android:gravity="center_vertical"
+    android:clickable="true"
+    android:focusable="true">
 
+    <!-- 커스텀 체크박스 -->
     <CheckBox
         android:id="@+id/categoryCheckBox"
+        android:layout_width="14dp"
+        android:layout_height="14dp"
+        android:button="@null"
+        android:background="@drawable/checkbox_selector"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:clickable="false"
+        android:padding="0dp"
+        android:layout_marginEnd="10dp"/>
+
+    <!-- 카테고리 이름 텍스트 -->
+    <TextView
+        android:id="@+id/categoryName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Category Name" />
+        android:text="Category Name"
+        android:textSize="18sp"
+        android:textColor="@color/knowing_sub_color"
+        android:fontFamily="@font/nanum_myeongjo" />
 </LinearLayout>

@@ -1,8 +1,14 @@
 package com.example.knowing_simple.ui.quiz
 
+import android.app.Dialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.view.Window
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
@@ -21,9 +27,9 @@ class SingleCategoryQuizActivity : AppCompatActivity() {
     private lateinit var questionTextView: TextView
     private lateinit var yesButton: Button
     private lateinit var noButton: Button
-    private lateinit var answerTextView: TextView
     private lateinit var showAnswerButton: Button
-    private var isAnswerVisible = false
+
+    private var currentAnswer: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,10 +39,9 @@ class SingleCategoryQuizActivity : AppCompatActivity() {
         val onlyUnknown = intent.getBooleanExtra("onlyUnknown", false)
 
         // View 초기화
-        questionTextView = findViewById(R.id.questionTextView)
+        questionTextView = findViewById<TextView>(R.id.questionTextView)
         yesButton = findViewById(R.id.yesButton)
         noButton = findViewById(R.id.noButton)
-        answerTextView = findViewById(R.id.answerTextView)
         showAnswerButton = findViewById(R.id.showAnswerButton)
 
         // QuizService 초기화
@@ -67,7 +72,7 @@ class SingleCategoryQuizActivity : AppCompatActivity() {
         }
 
         showAnswerButton.setOnClickListener{
-            toggleAnswerVisibility()
+            showAnswerDialog()
         }
 
     }
@@ -76,21 +81,35 @@ class SingleCategoryQuizActivity : AppCompatActivity() {
     private fun showQuiz() {
         val currentQuiz = singleCategoryQuizService.getCurrentQuiz()
         questionTextView.text = currentQuiz.question
-        answerTextView.text = currentQuiz.answer
-        answerTextView.visibility = View.GONE
-        isAnswerVisible = false
+        currentAnswer = currentQuiz.answer
         showAnswerButton.text = "답 확인"
     }
 
-    private fun toggleAnswerVisibility() {
-        if (isAnswerVisible) {
-            answerTextView.visibility = View.GONE
-            showAnswerButton.text = "답 확인"
-        } else {
-            answerTextView.visibility = View.VISIBLE
-            showAnswerButton.text = "답 숨기기"
+    private fun showAnswerDialog() {
+        // Dialog 생성 및 설정
+        val dialog = Dialog(this)
+        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
+        val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_answer, null,false)
+
+        dialogView.clipToOutline = true
+
+        dialog.setContentView(dialogView)
+        dialog.window?.setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+
+
+        val answerTextView = dialogView.findViewById<TextView>(R.id.answerTextView)
+        val closeButton = dialogView.findViewById<Button>(R.id.closeButton)
+
+        // 답변 설정
+        answerTextView.text = currentAnswer
+
+        // 닫기 버튼 클릭 시 Dialog 닫기
+        closeButton.setOnClickListener {
+            dialog.dismiss()
         }
-        isAnswerVisible = !isAnswerVisible
+
+        dialog.show()
     }
 
     private fun onAnswerSelected(isKnown: Boolean) {
