@@ -65,38 +65,14 @@
         app:layout_constraintTop_toBottomOf="@id/imgTitle">
 
         <Button
-            android:id="@+id/btnCategory5"
+            android:id="@+id/btnCategory1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/nanum_myeongjo"
             android:paddingStart="0dp"
             android:paddingEnd="10dp"
-            android:text="• 자료구조"
-            android:textColor="@color/knowing_sub_color"
-            android:textSize="24sp" />
-
-        <Button
-            android:id="@+id/btnCategory4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/nanum_myeongjo"
-            android:paddingStart="0dp"
-            android:paddingEnd="10dp"
-            android:text="• 네트워크"
-            android:textColor="@color/knowing_sub_color"
-            android:textSize="24sp" />
-
-        <Button
-            android:id="@+id/btnCategory3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:fontFamily="@font/nanum_myeongjo"
-            android:paddingStart="0dp"
-            android:paddingEnd="10dp"
-            android:text="• 데이터베이스"
+            android:text="• 컴퓨터 구조"
             android:textColor="@color/knowing_sub_color"
             android:textSize="24sp" />
 
@@ -113,14 +89,38 @@
             android:textSize="24sp" />
 
         <Button
-            android:id="@+id/btnCategory1"
+            android:id="@+id/btnCategory3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/nanum_myeongjo"
             android:paddingStart="0dp"
             android:paddingEnd="10dp"
-            android:text="• 컴퓨터 구조"
+            android:text="• 데이터베이스"
+            android:textColor="@color/knowing_sub_color"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/btnCategory4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/nanum_myeongjo"
+            android:paddingStart="0dp"
+            android:paddingEnd="10dp"
+            android:text="• 네트워크"
+            android:textColor="@color/knowing_sub_color"
+            android:textSize="24sp" />
+
+        <Button
+            android:id="@+id/btnCategory5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/nanum_myeongjo"
+            android:paddingStart="0dp"
+            android:paddingEnd="10dp"
+            android:text="• 자료구조"
             android:textColor="@color/knowing_sub_color"
             android:textSize="24sp" />
 
