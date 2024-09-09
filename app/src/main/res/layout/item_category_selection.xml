@@ -13,8 +13,8 @@
     <!-- 커스텀 체크박스 -->
     <CheckBox
         android:id="@+id/categoryCheckBox"
-        android:layout_width="14dp"
-        android:layout_height="14dp"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
         android:button="@null"
         android:background="@drawable/checkbox_selector"
         android:focusable="false"
