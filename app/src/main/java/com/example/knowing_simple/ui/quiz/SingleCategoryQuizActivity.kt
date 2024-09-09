@@ -92,7 +92,7 @@ class SingleCategoryQuizActivity : AppCompatActivity() {
         val currentQuiz = singleCategoryQuizService.getCurrentQuiz()
         questionTextView.text = currentQuiz.question
         currentAnswer = currentQuiz.answer
-        showAnswerButton.text = "답 확인"
+        showAnswerButton.text = "답변 열기"
     }
 
     private fun showAnswerDialog() {
