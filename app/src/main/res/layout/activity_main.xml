@@ -7,12 +7,12 @@
     <!-- 상단 타이틀 이미지 -->
     <ImageView
         android:id="@+id/imgTitle"
-        android:layout_width="180dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="35dp"
+        android:layout_width="160dp"
+        android:layout_height="54dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="222dp"
-        android:src="@drawable/knowing_title"
+        android:src="@drawable/knowing_title_with_appman"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -57,7 +57,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginTop="64dp"
+        android:layout_marginTop="56dp"
         android:orientation="vertical"
         android:paddingStart="0dp"
         android:paddingEnd="0dp"
