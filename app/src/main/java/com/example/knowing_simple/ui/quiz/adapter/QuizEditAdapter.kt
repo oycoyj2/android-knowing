@@ -48,14 +48,24 @@ class QuizEditAdapter(private var quizList: List<Quiz>, private val context: Con
     }
 
     inner class QuizEditViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val questionTextView: TextView = itemView.findViewById(R.id.questionTextView)
         private val deleteCheckBox: CheckBox = itemView.findViewById(R.id.deleteCheckBox)
+        private val questionTextView: TextView = itemView.findViewById(R.id.questionTextView)
 
         fun bind(quiz: Quiz) {
             questionTextView.text = quiz.question
 
             deleteCheckBox.setOnCheckedChangeListener(null) // 이전 상태를 초기화
             deleteCheckBox.isChecked = selectedQuizIds.contains(quiz.id)
+
+            itemView.setOnClickListener{
+                val isChecked = !deleteCheckBox.isChecked
+                deleteCheckBox.isChecked = isChecked
+                if (isChecked) {
+                    selectedQuizIds.add(quiz.id)
+                } else {
+                    selectedQuizIds.remove(quiz.id)
+                }
+            }
 
             deleteCheckBox.setOnCheckedChangeListener { _, isChecked ->
                 if (isChecked) {
