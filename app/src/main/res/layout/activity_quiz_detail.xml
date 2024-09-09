@@ -1,22 +1,80 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@color/knowing_theme_color">
 
-    <TextView
-        android:id="@+id/questionTextView"
+    <!-- 상단 타이틀 이미지 -->
+    <ImageView
+        android:id="@+id/imgTitle"
+        android:layout_width="180dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="222dp"
+        android:src="@drawable/knowing_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/editQuizButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Question"
-        android:textSize="24sp"
-        android:layout_marginBottom="16dp" />
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/imgTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="20dp">
 
-    <TextView
-        android:id="@+id/answerTextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Answer"
-        android:textSize="20sp" />
+        <TextView
+            android:id="@+id/questionTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="질문"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_gravity="start"
+            android:textColor="@color/knowing_orange_color"
+            android:paddingBottom="10dp"
+            android:fontFamily="@font/nanum_myeongjo" />
 
-</LinearLayout>
+        <TextView
+            android:id="@+id/questionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_myeongjo"
+            android:textColor="@color/knowing_sub_color"
+            android:text="Question"
+            android:textSize="16sp"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
+            android:id="@+id/answerTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="답변"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_gravity="start"
+            android:textColor="@color/knowing_orange_color"
+            android:paddingBottom="10dp"
+            android:fontFamily="@font/nanum_myeongjo" />
+
+        <TextView
+            android:id="@+id/answerTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_myeongjo"
+            android:textColor="@color/knowing_sub_color"
+            android:text="Answer"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
