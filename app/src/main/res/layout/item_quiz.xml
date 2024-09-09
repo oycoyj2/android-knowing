@@ -21,7 +21,7 @@
         android:backgroundTint="#00000000"
         android:textColor="@color/knowing_sub_color"
         android:fontFamily="@font/nanum_myeongjo"
-        android:textSize="14sp"
+        android:textSize="16sp"
         android:gravity="start"
         android:layout_gravity="center_vertical"
         android:paddingStart="8dp"

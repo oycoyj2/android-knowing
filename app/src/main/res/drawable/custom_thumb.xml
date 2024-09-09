@@ -1,0 +1,5 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <solid android:color="@color/knowing_sub_color"/> <!-- thumb 색상 설정 -->
+    <corners android:radius="4dp"/> <!-- 모서리 둥글게 설정 -->
+</shape>
