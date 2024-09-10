@@ -42,8 +42,8 @@ class AddQuizActivity : AppCompatActivity() {
         CoroutineScope(Dispatchers.IO).launch {
             categoryList = quizDatabase.categoryDao().getAllCategories() // 모든 카테고리 가져오기
             withContext(Dispatchers.Main) {
-                val adapter = ArrayAdapter(this@AddQuizActivity, android.R.layout.simple_spinner_item, categoryList.map { it.name })
-                adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+                val adapter = ArrayAdapter(this@AddQuizActivity, R.layout.item_categoory_spinner_selection, categoryList.map { it.name })
+                adapter.setDropDownViewResource(R.layout.item_spinner_dropdown)
                 categorySpinner.adapter = adapter
             }
         }

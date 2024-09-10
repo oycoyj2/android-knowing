@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 배경 색상 -->
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/knowing_theme_color" />
+            <corners android:radius="8dp" />
+            <stroke android:width="2dp" android:color="@color/knowing_orange_color"/>
+        </shape>
+    </item>
+
+    <!-- 오른쪽 화살표 아이콘 -->
+    <item
+        android:drawable="@drawable/ic_arrow_down"
+        android:gravity="end|center_vertical"
+        android:right="16dp"/>
+</layer-list>
