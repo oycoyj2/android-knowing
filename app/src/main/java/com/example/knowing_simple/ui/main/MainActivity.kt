@@ -29,6 +29,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var category4Button: Button
     private lateinit var category5Button: Button
     private lateinit var category6Button: Button
+    private lateinit var category7Button: Button
     private lateinit var categorySelectionButton: Button
 
     private var selectedCategoryIds: List<Int>? = null
@@ -47,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         category4Button = findViewById(R.id.btnCategory4)
         category5Button = findViewById(R.id.btnCategory5)
         category6Button = findViewById(R.id.btnCategory6)
+        category7Button = findViewById(R.id.btnCategory7)
         categorySelectionButton = findViewById(R.id.btnCategorySelection)
 
 
@@ -106,6 +108,12 @@ class MainActivity : AppCompatActivity() {
         category6Button.setOnClickListener {
             val intent = Intent(this, QuizListActivity::class.java)
             intent.putExtra("categoryId", 6)
+            startActivity(intent)
+        }
+
+        category7Button.setOnClickListener {
+            val intent = Intent(this, QuizListActivity::class.java)
+            intent.putExtra("categoryId", 7)
             startActivity(intent)
         }
 

@@ -63,6 +63,7 @@ abstract class QuizDatabase : RoomDatabase() {
                 categoryDao.insertCategory(Category(4, "자료구조"))
                 categoryDao.insertCategory(Category(5, "알고리즘"))
                 categoryDao.insertCategory(Category(6, "데이터베이스"))
+                categoryDao.insertCategory(Category(7, "나의 카테고리"))
             }
         }
     }
