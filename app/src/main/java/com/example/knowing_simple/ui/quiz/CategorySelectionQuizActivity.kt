@@ -92,8 +92,8 @@ class CategorySelectionQuizActivity : AppCompatActivity() {
     private fun showAnswerDialog() {
         // Dialog 생성 및 설정
         val dialog = Dialog(this)
-        dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-        dialog?.window?.requestFeature(Window.FEATURE_NO_TITLE)
+        dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.window?.requestFeature(Window.FEATURE_NO_TITLE)
         val dialogView = LayoutInflater.from(this).inflate(R.layout.dialog_answer, null)
 
         dialog.setContentView(dialogView)

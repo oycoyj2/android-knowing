@@ -53,20 +53,49 @@
             android:textSize="16sp" />
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/categoryNameTextView"
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:id="@+id/categoryNameView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:fontFamily="@font/nanum_myeongjo"
-        android:gravity="center"
-        android:padding="8dp"
-        android:textColor="@color/knowing_sub_color"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp"
+        android:orientation="horizontal"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imgTitle" />
+        app:layout_constraintBottom_toTopOf="@+id/quizRecyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/imgTitle">
+
+        <TextView
+            android:id="@+id/categoryNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_myeongjo"
+            android:gravity="center"
+            android:padding="8dp"
+            android:textColor="@color/knowing_sub_color"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/knownQuizCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_myeongjo"
+            android:textColor="@color/knowing_sub_color"
+            android:text="0"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/totalQuizCountTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nanum_myeongjo"
+            android:textColor="@color/knowing_sub_color"
+            android:text="0"
+            android:textSize="24sp" />
+
+        <!-- 알고 있는 문제 개수 텍스트뷰 -->
+    </LinearLayout>
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/quizRecyclerView"
@@ -78,7 +107,7 @@
         android:orientation="vertical"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        app:layout_constraintTop_toBottomOf="@id/categoryNameTextView"
+        app:layout_constraintTop_toBottomOf="@id/categoryNameView"
         app:layout_constraintBottom_toTopOf="@id/singleCategoryQuizButton"
         android:scrollbars="vertical"
         android:scrollbarThumbVertical="@drawable/custom_thumb"

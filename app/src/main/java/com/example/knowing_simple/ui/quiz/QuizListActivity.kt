@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -23,11 +24,14 @@ class QuizListActivity : AppCompatActivity() {
 
     private lateinit var quizRecyclerView: RecyclerView
     private lateinit var quizAdapter: QuizAdapter
-    private lateinit var  editButton: Button
+    private lateinit var editButton: Button
     private lateinit var startCategoryQuizButton: Button
     private lateinit var startUnknownCategoryQuizButton: Button
     private lateinit var addQuizButton: Button
     private lateinit var categoryNameTextView: TextView
+    private lateinit var totalQuizCountTextView: TextView // 총 문제 개수
+    private lateinit var knownQuizCountTextView: TextView
+    private lateinit var categoryNameView: LinearLayout
 
     private var categoryId: Int? = null
 
@@ -49,7 +53,10 @@ class QuizListActivity : AppCompatActivity() {
         quizRecyclerView = findViewById(R.id.quizRecyclerView)
         quizRecyclerView.layoutManager = LinearLayoutManager(this)
 
+        categoryNameView = findViewById<LinearLayout>(R.id.categoryNameView)
         categoryNameTextView = findViewById(R.id.categoryNameTextView)
+        totalQuizCountTextView = findViewById(R.id.totalQuizCountTextView)
+        knownQuizCountTextView = findViewById(R.id.knownQuizCountTextView)
 
         quizAdapter = QuizAdapter(listOf(), this)
         quizRecyclerView.adapter = quizAdapter
@@ -57,6 +64,7 @@ class QuizListActivity : AppCompatActivity() {
         editButton = findViewById(R.id.editButton)
         startCategoryQuizButton = findViewById(R.id.startCategoryQuizButton)
         startUnknownCategoryQuizButton = findViewById(R.id.startUnknownCategoryQuizButton)
+
 
         categoryId = intent.getIntExtra("categoryId", -1)
 
@@ -67,7 +75,6 @@ class QuizListActivity : AppCompatActivity() {
             startActivity(intent)
         }
         loadQuizData()
-
         loadCategoryName()
 
         editButton.setOnClickListener {
@@ -116,6 +123,9 @@ class QuizListActivity : AppCompatActivity() {
     private fun loadQuizData() {
         CoroutineScope(Dispatchers.IO).launch {
             val quizDao = QuizDatabase.getDatabase(this@QuizListActivity).quizDao()
+            val totalQuizCount = quizDao.getQuizCountByCategoryId(categoryId!!)
+            val knownQuizCount = quizDao.getKnownQuizCountByCategoryId(categoryId!!)
+
             val quizList = if (categoryId != null && categoryId != -1) {
                 quizDao.getQuizzesByCategoryId(categoryId!!) // 카테고리에 맞는 퀴즈를 가져옴
             } else {
@@ -124,8 +134,11 @@ class QuizListActivity : AppCompatActivity() {
 
             withContext(Dispatchers.Main) {
                 quizAdapter.updateData(quizList) // 어댑터에 데이터 업데이트
+                knownQuizCountTextView.text = "($knownQuizCount "
+                totalQuizCountTextView.text = "/ $totalQuizCount)"
             }
         }
     }
+
 
 }

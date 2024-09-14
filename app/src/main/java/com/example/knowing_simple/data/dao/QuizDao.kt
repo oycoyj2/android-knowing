@@ -50,4 +50,10 @@ interface QuizDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertAll(quizzes: List<Quiz>)
+
+    @Query("SELECT COUNT(*) FROM quiz_table WHERE categoryId = :categoryId")
+    suspend fun getQuizCountByCategoryId(categoryId: Int): Int
+
+    @Query("SELECT COUNT(*) FROM quiz_table WHERE categoryId = :categoryId AND isKnown = 1")
+    suspend fun getKnownQuizCountByCategoryId(categoryId: Int): Int
 }
